@@ -3,8 +3,8 @@
 
 {#- Get the `tplroot` from `tpldir` #}
 {%- set tplroot = tpldir.split('/')[0] %}
-{%- from tplroot ~ "/map.jinja" import mapdata as TEMPLATE with context %}
+{%- from tplroot ~ "/map.jinja" import mapdata as rsyslog with context %}
 
-TEMPLATE-package-install-pkg-installed:
+rsyslog-package-install-pkg-installed:
   pkg.installed:
-    - name: {{ TEMPLATE.pkg.name }}
+    - name: {{ rsyslog.pkg.name }}
