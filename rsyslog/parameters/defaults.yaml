@@ -5,13 +5,13 @@
 ---
 values:
   pkg:
-    name: rsyslog
+    name: TEMPLATE
   rootgroup: root
-  config: '/etc/rsyslog.conf'
+  config: '/etc/TEMPLATE'
   service:
-    name: rsyslog
+    name: TEMPLATE
   subcomponent:
-    config: '/etc/rsyslog-subcomponent-formula.conf'
+    config: '/etc/TEMPLATE-subcomponent-formula.conf'
   # Just here for testing
   added_in_defaults: defaults_value
   winner: defaults
