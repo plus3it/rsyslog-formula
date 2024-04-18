@@ -13,6 +13,6 @@
 ---
 values:
   pkg:
-    name: TEMPLATE-redhat
-  config: /etc/TEMPLATE.conf
+    name: rsyslog
+  config: /etc/rsyslog.conf
 ...
