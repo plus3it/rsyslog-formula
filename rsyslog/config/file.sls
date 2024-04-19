@@ -13,9 +13,16 @@ include:
 
 {%- for loghost in loghost_list %}
 rsyslog-config_d-{{ loghost }}:
-  file.touch:
+  file.managed:
     - name: /etc/rsyslog.d/{{ loghost }}.conf
-    - makedirs: True
+    - contents: |-
+  {%- if loghost.protocol == 'udp' %}
+        *.* @{{ loghost }}
+  {%- elif loghost.protocol == 'tcp' %}
+        *.* @@{{ loghost }}
+  {%- else %}
+        # *.* {{ loghost.protocol }}@{{ loghost }}
+  {%- endif %}
     - require:
       - sls: {{ sls_package_install }}
 {%- endfor %}
