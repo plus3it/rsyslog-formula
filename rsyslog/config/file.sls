@@ -6,23 +6,21 @@
 {%- set sls_package_install = tplroot ~ '.package.install' %}
 {%- from tplroot ~ "/map.jinja" import mapdata as rsyslog with context %}
 {%- from tplroot ~ "/libtofs.jinja" import files_switch with context %}
-{%- set loghost_list = salt.pillar.get('rsyslog:lookup:remote_loghosts', []) %}
+{%- set loghost_dict = salt.pillar.get('rsyslog:lookup:remote_hosts', {}) %}
 
 include:
   - {{ sls_package_install }}
 
-{%- for loghost in loghost_list %}
-rsyslog-config_d-{{ loghost }}:
+{%- for loghost, values in loghost_dict.items() %}
+file-{{ loghost }}:
   file.managed:
-    - name: /etc/rsyslog.d/{{ loghost }}.conf
+    - name: '/etc/rsyslog.d/{{ loghost }}.conf'
     - contents: |-
-  {%- if loghost.protocol == 'udp' %}
+  {%- if values.protocol == 'udp' %}
         *.* @{{ loghost }}
-  {%- elif loghost.protocol == 'tcp' %}
+  {%- elif values.protocol == 'tcp' %}
         *.* @@{{ loghost }}
   {%- else %}
-        # *.* {{ loghost.protocol }}@{{ loghost }}
+        ## *.* {{ values.protocol }} {{ loghost }}
   {%- endif %}
-    - require:
-      - sls: {{ sls_package_install }}
 {%- endfor %}
