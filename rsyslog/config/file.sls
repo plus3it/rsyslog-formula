@@ -11,22 +11,32 @@
 include:
   - {{ sls_package_install }}
 
-{%- if loghost_dict | length = 0 %}
+{%- if loghost_dict|length == 0 %}
 No Remote syslog defined:
   test.show_notification:
     - text: |
-        --------------------------------------
+        ----------------------------------------
         No Pillar information supplied for
-        configuring logging to a remotei
-        rsyslog server
-        --------------------------------------
+        configuring logging to a remote rsyslog
+        server
+        ----------------------------------------
 {%- else %}
   {%- for loghost, values in loghost_dict.items() %}
+    {%- if values.encrypted == True or values.relp == True %}
+Bad sub-option:
+  test.show_notification:
+    - text: |
+        ----------------------------------------
+        {{ loghost }}:
+          Neither the 'encrypted' nor the 'relp'
+          sub-options are currently supported by
+          this saltstack formula
+        ----------------------------------------
+    {%- elif values.protocol == 'udp' or values.protocol == 'tcp' %}
 file-{{ loghost }}:
   file.managed:
     - name: '/etc/rsyslog.d/{{ loghost }}.conf'
     - contents: |-
-    {%- if values.protocol == 'udp' or values.protocol == 'tcp' %}
         *.* action(type="omfwd"
               queue.type="linkedlist"
               queue.filename="{{ loghost }}"
