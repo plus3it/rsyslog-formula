@@ -1,17 +1,17 @@
 rsyslog:
   lookup:
     remote_hosts:
-      loghost-tcp.plus3it.com:
+      loghost-tcp.myhost.com:
         protocol: 'tcp'
         port: 514
         encrypted: false
         relp: false
-      loghost-udp.plus3it.com:
+      loghost-udp.myhost.com:
         protocol: udp
         port: 514
         encrypted: false
         relp: false
-      loghost-tls.plus3it.com:
+      loghost-tls.myhost.com:
         protocol: tcp
         port: 514
         encrypted: true
