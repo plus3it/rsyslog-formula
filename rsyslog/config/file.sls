@@ -11,16 +11,31 @@
 include:
   - {{ sls_package_install }}
 
-{%- for loghost, values in loghost_dict.items() %}
+{%- if loghost_dict | length = 0 %}
+No Remote syslog defined:
+  test.show_notification:
+    - text: |
+        --------------------------------------
+        No Pillar information supplied for
+        configuring logging to a remotei
+        rsyslog server
+        --------------------------------------
+{%- else %}
+  {%- for loghost, values in loghost_dict.items() %}
 file-{{ loghost }}:
   file.managed:
     - name: '/etc/rsyslog.d/{{ loghost }}.conf'
     - contents: |-
-  {%- if values.protocol == 'udp' %}
-        *.* @{{ loghost }}
-  {%- elif values.protocol == 'tcp' %}
-        *.* @@{{ loghost }}
-  {%- else %}
-        ## *.* {{ values.protocol }} {{ loghost }}
-  {%- endif %}
-{%- endfor %}
+    {%- if values.protocol == 'udp' or values.protocol == 'tcp' %}
+        *.* action(type="omfwd"
+              queue.type="linkedlist"
+              queue.filename="{{ loghost }}"
+              action.resumeRetryCount="-1"
+              queue.saveOnShutdown="on"
+              target="{{ loghost }}" port="{{ values.port }}" protocol="{{ values.protocol }}"
+             )
+    {%- else %}
+        ## Requested protocol-name not supported
+    {%- endif %}
+  {%- endfor %}
+{%- endif %}
