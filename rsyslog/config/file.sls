@@ -24,8 +24,8 @@ No Remote syslog defined:
   {%- for loghost, values in loghost_dict.items() %}
     {%- if values.encrypted or values.relp %}
 Bad sub-option:
-  test.show_notification:
-    - text: |
+  test.fail_without_changes:
+    - comment: |
         ----------------------------------------
         {{ loghost }}:
           Neither the 'encrypted' nor the 'relp'
