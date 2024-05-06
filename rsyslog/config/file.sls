@@ -22,7 +22,7 @@ No Remote syslog defined:
         ----------------------------------------
 {%- else %}
   {%- for loghost, values in loghost_dict.items() %}
-    {%- if values.encrypted == True or values.relp == True %}
+    {%- if values.encrypted or values.relp %}
 Bad sub-option:
   test.show_notification:
     - text: |
