@@ -13,8 +13,8 @@ include:
 
 {%- if not loghost_dict %}
 No Remote syslog defined:
-  test.show_notification:
-    - text: |
+  test.fail_without_changes:
+    - comment: |
         ----------------------------------------
         No Pillar information supplied for
         configuring logging to a remote rsyslog
