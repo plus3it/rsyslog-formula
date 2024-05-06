@@ -15,7 +15,7 @@ jobs:
           - 7
           - 8
         salt_state:
-          - yum-cron
+          - rsyslog
         salt_pillar_root:
           - ./tests/pillar/test-linux-main
     with:
