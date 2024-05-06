@@ -12,5 +12,5 @@
 # values: {}
 ---
 values:
-  config: /etc/TEMPLATE.d/custom-ubuntu-18.04.conf
+  config: /etc/rsyslog.d/custom-ubuntu-18.04.conf
 ...

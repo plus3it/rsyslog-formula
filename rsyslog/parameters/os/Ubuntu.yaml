@@ -13,6 +13,6 @@
 ---
 values:
   pkg:
-    name: TEMPLATE-ubuntu
-  config: /etc/TEMPLATE.d/custom-ubuntu.conf
+    name: rsyslog-ubuntu
+  config: /etc/rsyslog.d/custom-ubuntu.conf
 ...

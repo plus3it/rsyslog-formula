@@ -13,6 +13,6 @@
 ---
 values:
   pkg:
-    name: TEMPLATE-centos-6
-  config: /etc/TEMPLATE.d/custom-centos-6.conf
+    name: rsyslog-centos-6
+  config: /etc/rsyslog.d/custom-centos-6.conf
 ...

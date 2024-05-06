@@ -13,6 +13,6 @@
 ---
 values:
   pkg:
-    name: TEMPLATE-debian
-  config: /etc/TEMPLATE.d/custom.conf
+    name: rsyslog-debian
+  config: /etc/rsyslog.d/custom.conf
 ...

@@ -13,7 +13,7 @@
 ---
 values:
   pkg:
-    name: TEMPLATE-fedora
+    name: rsyslog-fedora
   service:
     name: service-fedora
 ...
