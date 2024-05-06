@@ -11,7 +11,7 @@
 include:
   - {{ sls_package_install }}
 
-{%- if loghost_dict|length == 0 %}
+{%- if not loghost_dict %}
 No Remote syslog defined:
   test.show_notification:
     - text: |
