@@ -43,7 +43,7 @@ file-{{ loghost }}:
               action.resumeRetryCount="-1"
               queue.saveOnShutdown="on"
               target="{{ loghost }}" port="{{ values.port }}" protocol="{{ values.protocol }}"
-             )
+            )
     {%- else %}
         ## Requested protocol-name not supported
     {%- endif %}
