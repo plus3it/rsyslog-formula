@@ -44,7 +44,7 @@ file-{{ loghost }}:
               queue.saveOnShutdown="on"
               target="{{ loghost }}" port="{{ values.port }}" protocol="{{ values.protocol }}"
             )
-        - mode: '0644'
+    - mode: '0644'
     - owner: 'root'
     - selinux:
         serange: 's0'
