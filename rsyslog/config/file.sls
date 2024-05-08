@@ -44,6 +44,15 @@ file-{{ loghost }}:
               queue.saveOnShutdown="on"
               target="{{ loghost }}" port="{{ values.port }}" protocol="{{ values.protocol }}"
             )
+        - mode: '0644'
+    - owner: 'root'
+    - selinux:
+        serange: 's0'
+        serole: 'object_r'
+        setype: 'syslog_conf_t"
+        seuser: 'system_u'
+    - user: 'root'
+
     {%- else %}
         ## Requested protocol-name not supported
     {%- endif %}
