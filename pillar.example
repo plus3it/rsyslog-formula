@@ -1,18 +1,17 @@
 rsyslog:
+
   lookup:
+
+    #############################################################
+    #
+    # Parameters REQUIRED for configuring log-duplication to a
+    # remote syslog host
+    #
+    #############################################################
+
     remote_hosts:
-      loghost-tcp.myhost.com:
-        protocol: 'tcp'
-        port: 514
-        encrypted: false
-        relp: false
-      loghost-udp.myhost.com:
-        protocol: udp
-        port: 514
-        encrypted: false
-        relp: false
-      loghost-tls.myhost.com:
-        protocol: tcp
-        port: 514
-        encrypted: true
-        relp: false
+      <REMOTE>:    # Fully-qualified domain name or IP of remot log-collector (e.g., 'loghost-tcp.myhost.com')
+        protocol:  # Either of 'tcp' or 'udp'
+        port: 514  # The Port that the remote syslog serve is listening for events on
+        encrypted: # Either of 'true' or 'false' (only 'false' currently supported)
+        relp:      # Either of 'true' or 'false' (only 'false' currently supported)

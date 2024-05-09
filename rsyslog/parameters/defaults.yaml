@@ -10,9 +10,4 @@ values:
   config: '/etc/rsyslog'
   service:
     name: rsyslog
-  subcomponent:
-    config: '/etc/rsyslog-subcomponent-formula.conf'
-  # Just here for testing
-  added_in_defaults: defaults_value
-  winner: defaults
 ...
