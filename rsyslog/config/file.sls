@@ -49,7 +49,7 @@ file-{{ loghost }}:
     - selinux:
         serange: 's0'
         serole: 'object_r'
-        setype: 'syslog_conf_t"
+        setype: 'syslog_conf_t'
         seuser: 'system_u'
     - user: 'root'
 
